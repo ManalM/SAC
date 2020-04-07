@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    tools:context=".ContactFragment">
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:src="@drawable/logo" />
+    <EditText
+        android:layout_marginTop="20dp"
+        android:id="@+id/name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:drawableStart="@drawable/name"
+        android:drawableLeft="@drawable/name"
+        android:drawablePadding="10dp"
+        android:ems="10"
+        android:hint="Name"
+        android:lines="1"
+        android:inputType="text" />
+    <EditText
+
+        android:id="@+id/email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:drawableStart="@drawable/email"
+        android:drawableLeft="@drawable/email"
+        android:drawablePadding="10dp"
+        android:ems="10"
+        android:layout_marginTop="10dp"
+
+        android:hint="Email"
+        android:inputType="textEmailAddress" />
+
+    <EditText
+        android:id="@+id/phone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:drawablePadding="10dp"
+        android:layout_marginTop="10dp"
+
+        android:drawableStart="@drawable/phone"
+        android:drawableLeft="@drawable/phone"
+        android:hint="Phone number"
+        android:inputType="phone" />
+
+    <EditText
+        android:id="@+id/specialization"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:ems="10"
+        android:inputType="textMultiLine"
+        android:drawableStart="@drawable/message"
+        android:drawableLeft="@drawable/message"
+        android:drawablePadding="10dp"
+        android:layout_marginTop="10dp"
+
+        android:hint="Message" />
+    <Button
+        android:id="@+id/login"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:textColor="#fff"
+        android:textSize="18sp"
+
+        android:background="@color/colorAccent"
+
+        android:textStyle="bold"
+        android:text="Send" />
+</LinearLayout>

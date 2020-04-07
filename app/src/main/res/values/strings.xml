@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">SAC</string>
+    <string name="about">
+        Student Activities committee: We are committee members who developed this electronic platform for university students that aims to organise and manage
+        university clubs and their activities. The system links the students, clubs and administration so the process become organized and more effective
+    </string>
+</resources>

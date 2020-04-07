@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <item
+        android:id="@+id/activity"
+        android:icon="@drawable/active"
+        android:title="Activity"
+        app:showAsAction="always|withText" />
+    <item
+        android:id="@+id/club"
+        android:icon="@drawable/club"
+        android:title="Clubs"
+        app:showAsAction="always|withText" />
+    <item
+        android:id="@+id/edit"
+        android:icon="@drawable/edit"
+        android:title="Edit profile"
+        app:showAsAction="always|withText" />
+
+
+</menu>

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+
+    tools:context=".MainActivity">
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:layout_gravity="center"
+        android:layout_margin="30dp"
+        android:src="@drawable/logo" />
+
+    <Button
+        android:id="@+id/sign_in"
+        android:textSize="22sp"
+
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:onClick="signIn"
+        android:background="@color/colorAccent"
+        android:textColor="#fff"
+        android:layout_marginTop="30dp"
+        android:text="Sign in" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        android:textColor="@color/colorAccent"
+        android:layout_margin="20dp"
+        android:text="Or create a new account" />
+
+    <Button
+        android:id="@+id/sign_up"
+        android:onClick="signUp"
+        android:textColor="#fff"
+        android:textSize="22sp"
+        android:background="@color/colorAccent"
+
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:text="Sign up " />
+
+</LinearLayout>
