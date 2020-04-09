@@ -17,7 +17,7 @@
     app:columnCount="2"
     app:columnOrderPreserved="false"
     app:rowCount="3"
-    tools:context=".ClubFragment">
+    tools:context=".archive.ClubFragment">
 
 
     <androidx.cardview.widget.CardView
