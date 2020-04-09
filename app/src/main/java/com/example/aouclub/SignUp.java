@@ -4,8 +4,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.provider.MediaStore;
+import android.util.Base64;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -22,13 +26,22 @@ import com.example.aouclub.sarver.Config;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
 public class SignUp extends AppCompatActivity {
 
     EditText name, id, major, brunch, mobile, email, pass, confirmPass;
+    private int PICK_IMAGE_REQUEST = 1;
 
+
+    private ImageView imageView;
+
+    private Bitmap bitmap;
+
+    private Uri filePath;
     ImageView image;
     SharedPreferences pref;
     SharedPreferences.Editor editor ;
@@ -50,7 +63,7 @@ public class SignUp extends AppCompatActivity {
     }
 
     public void signUp(View view) {
-        startActivity(new Intent(SignUp.this, HomeActivity.class));
+        register();
     }
     boolean isEmailValid(CharSequence email) {
         return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches();
@@ -71,9 +84,10 @@ public class SignUp extends AppCompatActivity {
                                 editor.putString("mobile",mobile.getText().toString());
                                 editor.putString("brunch",brunch.getText().toString());
                                 //todo:image
-                                editor.putString("image",obj.getString("image"));
+                             //   editor.putString("image",obj.getString("image"));
                                 editor.apply();
-
+                                startActivity(new Intent(SignUp.this, HomeActivity.class));
+                                finish();
 
                             }else{
                                 Toast.makeText(SignUp.this, "password doesn't match", Toast.LENGTH_SHORT).show();
@@ -115,10 +129,57 @@ public class SignUp extends AppCompatActivity {
                 parms.put("mobile",mobile.getText().toString().trim());
                 parms.put("brunch",brunch.getText().toString().trim());
                 parms.put("email",email.getText().toString().trim());
-                //todo:image
+                parms.put("image",getStringImage(bitmap));
+                //todo:test image and change in php the png
                 return parms;
             }
         };
         Volley.newRequestQueue(this).add(stringRequest);
     }
+    public String getStringImage(Bitmap bmp){
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bmp.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+        byte[] imageBytes = baos.toByteArray();
+        String encodedImage = Base64.encodeToString(imageBytes, Base64.DEFAULT);
+        return encodedImage;
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null) {
+
+            filePath = data.getData();
+            try {
+                bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), filePath);
+                imageView.setImageBitmap(bitmap);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+/*
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
+            CropImage.ActivityResult result = CropImage.getActivityResult(data);
+            if (resultCode == RESULT_OK) {
+
+                mainImageURI = result.getUri();
+                userImage.setImageURI(mainImageURI);
+
+                isChanged = true;
+
+            } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
+
+                Exception error = result.getError();
+
+            }
+        }
+
+    }
+*/
 }
