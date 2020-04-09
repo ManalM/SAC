@@ -4,13 +4,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.PopupMenu;
-import android.widget.Toolbar;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -38,11 +33,11 @@ public class HomeActivity extends AppCompatActivity  {
                 case R.id.activity:
                     selectedFragment = new ActivityFragment();
                     break;
-                case R.id.club:
+       /*         case R.id.club:
                     selectedFragment = new ClubFragment();
-                    break;
+                    break;*/
                 case R.id.edit:
-                    selectedFragment = new EditFragment();
+                    selectedFragment = new ProfileFragment();
                     break;
 
             }

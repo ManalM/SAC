@@ -8,14 +8,14 @@
     tools:context=".SignUp">
 
     <ImageView
-        android:layout_marginTop="10dp"
         android:id="@+id/imageView"
         android:layout_width="150dp"
         android:layout_height="150dp"
         android:layout_gravity="center"
-        app:srcCompat="@drawable/logo" />
+        android:layout_marginTop="10dp"
+        app:srcCompat="@drawable/person" />
     <EditText
-        android:id="@+id/name"
+        android:id="@+id/name_up"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
@@ -29,7 +29,7 @@
 
     <EditText
 
-        android:id="@+id/email"
+        android:id="@+id/email_up"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
@@ -41,7 +41,7 @@
         android:inputType="textEmailAddress" />
 
     <EditText
-        android:id="@+id/password"
+        android:id="@+id/password_up"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
@@ -53,7 +53,7 @@
         android:inputType="textPassword" />
 
     <EditText
-        android:id="@+id/confirm_password"
+        android:id="@+id/confirm_password_up"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
@@ -65,7 +65,7 @@
         android:inputType="textPassword" />
 
     <EditText
-        android:id="@+id/phone"
+        android:id="@+id/phone_up"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
@@ -77,7 +77,7 @@
         android:inputType="phone" />
 
     <EditText
-        android:id="@+id/specialization"
+        android:id="@+id/specialization_up"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
@@ -90,7 +90,7 @@
         android:lines="1" />
 
     <EditText
-        android:id="@+id/brunch"
+        android:id="@+id/brunch_up"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
@@ -103,7 +103,7 @@
         android:lines="1" />
 
     <EditText
-        android:id="@+id/id"
+        android:id="@+id/id_up"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"

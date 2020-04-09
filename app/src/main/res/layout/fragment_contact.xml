@@ -14,7 +14,7 @@
         android:src="@drawable/logo" />
     <EditText
         android:layout_marginTop="20dp"
-        android:id="@+id/name"
+        android:id="@+id/n"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:drawableStart="@drawable/name"
@@ -26,7 +26,6 @@
         android:inputType="text" />
     <EditText
 
-        android:id="@+id/email"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:drawableStart="@drawable/email"
@@ -39,7 +38,7 @@
         android:inputType="textEmailAddress" />
 
     <EditText
-        android:id="@+id/phone"
+        android:id="@+id/p"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -52,7 +51,7 @@
         android:inputType="phone" />
 
     <EditText
-        android:id="@+id/specialization"
+
         android:layout_width="match_parent"
         android:layout_height="100dp"
         android:ems="10"
@@ -64,7 +63,7 @@
 
         android:hint="Message" />
     <Button
-        android:id="@+id/login"
+
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"

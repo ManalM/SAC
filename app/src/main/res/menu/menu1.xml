@@ -4,9 +4,9 @@
     <item
         android:id="@+id/about"
         android:title="About us" />
-    <item
+<!--    <item
         android:id="@+id/contact"
-        android:title="Contact us" />
+        android:title="Contact us" />-->
     <item
         android:id="@+id/log_out"
         android:title="Log out" />

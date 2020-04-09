@@ -8,11 +8,11 @@
         android:icon="@drawable/active"
         android:title="Activity"
         app:showAsAction="always|withText" />
-    <item
+ <!--   <item
         android:id="@+id/club"
         android:icon="@drawable/club"
         android:title="Clubs"
-        app:showAsAction="always|withText" />
+        app:showAsAction="always|withText" />-->
     <item
         android:id="@+id/edit"
         android:icon="@drawable/edit"
