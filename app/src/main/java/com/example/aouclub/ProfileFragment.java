@@ -2,6 +2,9 @@ package com.example.aouclub;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.appcompat.widget.Toolbar;
@@ -17,8 +20,17 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.MalformedURLException;
+import java.net.URL;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class ProfileFragment extends Fragment implements PopupMenu.OnMenuItemClickListener {
 
@@ -44,7 +56,7 @@ public class ProfileFragment extends Fragment implements PopupMenu.OnMenuItemCli
         });
         ///--------------------initial------------------------------
         TextView name, id, major, brunch, mobile,email;
-        ImageView image;
+        CircleImageView image;
         name = root.findViewById(R.id.name);
         id = root.findViewById(R.id.id);
         email = root.findViewById(R.id.email);
@@ -55,12 +67,31 @@ public class ProfileFragment extends Fragment implements PopupMenu.OnMenuItemCli
         //-----------------------change textView---------------------------
         SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(getContext());
         name.setText(pref.getString("name", ""));
-        id.setText(pref.getString("id", ""));
+        id.setText(pref.getString("sid", ""));
         email.setText(pref.getString("email",""));
         major.setText(pref.getString("major", ""));
         mobile.setText(pref.getString("mobile", ""));
         brunch.setText(pref.getString("brunch", ""));
-        Glide.with(getContext()).load(pref.getString("image", "")).into(image);
+
+        String string = pref.getString("image","");
+        URL  url = null;
+        try {
+            url = new URL(string);
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+        Bitmap bitmap = null;
+        try {
+            if (url != null) {
+                bitmap = BitmapFactory.decodeStream(url.openConnection().getInputStream());
+            }else{
+                Toast.makeText(getContext(), "null url", Toast.LENGTH_SHORT).show();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        Glide.with(getContext()).setDefaultRequestOptions(new RequestOptions().placeholder(R.drawable.woman)).load(bitmap).into(image);
         return root;
     }
 

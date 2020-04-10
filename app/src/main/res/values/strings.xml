@@ -4,4 +4,7 @@
         Student Activities committee: We are committee members who developed this electronic platform for university students that aims to organise and manage
         university clubs and their activities. The system links the students, clubs and administration so the process become organized and more effective
     </string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

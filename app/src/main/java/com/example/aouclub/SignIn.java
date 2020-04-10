@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.View;
@@ -21,6 +23,9 @@ import com.example.aouclub.sarver.Config;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -50,12 +55,14 @@ public class SignIn extends AppCompatActivity {
                     JSONObject obj = new JSONObject(response);
                     if(!obj.getBoolean("error")){
                         editor.putString("name", obj.getString("name"));
-                        editor.putString("id",obj.getString("id"));
+                        editor.putString("sid",obj.getString("sid"));
                         editor.putString("state",obj.getString("state"));
                         editor.putString("email",obj.getString("email"));
                         editor.putString("major",obj.getString("major"));
                         editor.putString("mobile",obj.getString("mobile"));
                         editor.putString("brunch",obj.getString("brunch"));
+                        editor.putString("id",obj.getString("id"));
+
                         editor.putString("image",obj.getString("image"));
                         editor.apply();
 
@@ -74,7 +81,11 @@ public class SignIn extends AppCompatActivity {
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
-                }
+                } /*catch (MalformedURLException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }*/
 
             }
         }, new Response.ErrorListener() {
