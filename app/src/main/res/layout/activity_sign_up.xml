@@ -7,13 +7,16 @@
     android:orientation="vertical"
     tools:context=".SignUp">
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:layout_gravity="center"
-        android:layout_marginTop="10dp"
-        app:srcCompat="@drawable/person" />
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:scaleType="centerCrop"
+        android:id="@+id/sign_up_image"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        app:civ_border_width="2dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="12dp"
+        app:civ_border_color="#FF000000"
+        android:src="@drawable/person" />
     <EditText
         android:id="@+id/name_up"
         android:layout_width="match_parent"
@@ -112,7 +115,7 @@
         android:drawablePadding="10dp"
         android:ems="10"
         android:hint="Student ID"
-        android:inputType="text"
+        android:inputType="number"
         android:lines="1" />
 
     <Button

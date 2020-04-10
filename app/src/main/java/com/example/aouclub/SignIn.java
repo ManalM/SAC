@@ -59,7 +59,7 @@ public class SignIn extends AppCompatActivity {
                         editor.putString("image",obj.getString("image"));
                         editor.apply();
 
-                        if (pref.getString("state","").equals("active")){
+                        if (pref.getString("state","").equals("Active")){
                             startActivity(new Intent(SignIn.this,HomeActivity.class));
                             finish();
                         }else{
