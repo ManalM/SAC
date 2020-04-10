@@ -42,7 +42,7 @@ import java.util.ArrayList;
 
 public class ActivityFragment extends Fragment {
 
-   static RecyclerView recyclerView;
+    static RecyclerView recyclerView;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -66,7 +66,7 @@ public class ActivityFragment extends Fragment {
     }
 
     private class GetData extends AsyncTask<Void, Void, Void> {
-        ArrayList<String> activity, startDate,endDate, details, place, brunch, time,imageString;
+        ArrayList<String> activity, startDate, endDate, details, place, brunch, time, imageString;
         Bitmap[] bitmaps;
         String jsonUrl;
         Context context;
@@ -81,10 +81,10 @@ public class ActivityFragment extends Fragment {
             details = new ArrayList<>();
             place = new ArrayList<>();
             startDate = new ArrayList<>();
-            endDate= new ArrayList<>();
+            endDate = new ArrayList<>();
             brunch = new ArrayList<>();
             time = new ArrayList<>();
-            imageString= new ArrayList<>();
+            imageString = new ArrayList<>();
         }
 
         @Override
@@ -92,7 +92,7 @@ public class ActivityFragment extends Fragment {
 
             InputStream inputStream = null;
             String line = null;
-            String result =null;
+            String result = null;
             try {
                 URL url = new URL(jsonUrl);
                 HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
@@ -105,7 +105,7 @@ public class ActivityFragment extends Fragment {
                 Uri.Builder builder = new Uri.Builder().appendQueryParameter("username", pref.getString("id", ""));
                 String query = builder.build().getEncodedQuery();
                 OutputStream outputStream = httpURLConnection.getOutputStream();
-                BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream,"UTF-8"));
+                BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
                 bufferedWriter.write(query);
                 bufferedWriter.flush();
                 bufferedWriter.close();
@@ -114,21 +114,21 @@ public class ActivityFragment extends Fragment {
                 inputStream = new BufferedInputStream(httpURLConnection.getInputStream());
                 BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
                 StringBuilder stringBuilder = new StringBuilder();
-                if (stringBuilder != null){
-                    while((line =bufferedReader.readLine() )!= null){
+                if (stringBuilder != null) {
+                    while ((line = bufferedReader.readLine()) != null) {
                         stringBuilder.append(line + "\n");
 
                     }
-                }else{
-                    result =null;
+                } else {
+                    result = null;
                 }
-               result = stringBuilder.toString().trim();
+                result = stringBuilder.toString().trim();
 
             } catch (MalformedURLException e) {
                 e.printStackTrace();
             } catch (IOException e) {
                 e.printStackTrace();
-            }finally {
+            } finally {
                 if (inputStream != null) {
                     try {
                         inputStream.close();
@@ -140,9 +140,9 @@ public class ActivityFragment extends Fragment {
 
             try {
                 JSONArray jsonArray = new JSONArray(result);
-                JSONObject jsonObject =null;
+                JSONObject jsonObject = null;
 
-                for (int i=0 ;i<jsonArray.length(); i++){
+                for (int i = 0; i < jsonArray.length(); i++) {
                     jsonObject = jsonArray.getJSONObject(i);
                     details.add(jsonObject.getString("activity_details"));
                     activity.add(jsonObject.getString("activity_title"));
@@ -155,7 +155,7 @@ public class ActivityFragment extends Fragment {
                     bitmaps = convert(imageString);
 
                 }
-            } catch (JSONException  | IOException e) {
+            } catch (JSONException | IOException e) {
                 e.printStackTrace();
             }
             return null;
@@ -167,21 +167,20 @@ public class ActivityFragment extends Fragment {
             super.onPostExecute(aVoid);
 
 
-            adapter = new Adapter(context,activity,startDate,endDate,time,details,place,brunch, bitmaps);
+            adapter = new Adapter(context, activity, startDate, endDate, time, details, place, brunch, bitmaps);
             recyclerView.setAdapter(adapter);
             adapter.setOnItemClickListener(new Adapter.OnItemClickListener() {
                 @Override
                 public void onItemClick(int position) {
-                    Bundle bundle =new Bundle();
-                    bundle.putString("detail",details.get(position));
-                    bundle.putString("name",activity.get(position));
-                    //bundle.putString("bitmap",imageString.get(position));
+                    Bundle bundle = new Bundle();
+                    bundle.putString("detail", details.get(position));
+                    bundle.putString("name", activity.get(position));
 
                     ByteArrayOutputStream stream = new ByteArrayOutputStream();
                     bitmaps[position].compress(Bitmap.CompressFormat.PNG, 100, stream);
                     byte[] byteArray = stream.toByteArray();
-                    bundle.putByteArray("image",byteArray);
-                    ActivityDetailFragment activityDetailFragment =new ActivityDetailFragment();
+                    bundle.putByteArray("image", byteArray);
+                    ActivityDetailFragment activityDetailFragment = new ActivityDetailFragment();
                     activityDetailFragment.setArguments(bundle);
                     getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                             activityDetailFragment).commit();
@@ -190,15 +189,16 @@ public class ActivityFragment extends Fragment {
         }
     }
 
-    private  Bitmap[] convert(ArrayList<String> strings) throws IOException {
+    //----convert urlString to bitmap array
+    private Bitmap[] convert(ArrayList<String> strings) throws IOException {
         Bitmap[] imageURL = new Bitmap[strings.size()];
         URL url;
-        for (int i =0 ;i<strings.size();i++) {
+        for (int i = 0; i < strings.size(); i++) {
 
-             url = new URL(strings.get(i));
+            url = new URL(strings.get(i));
 
             imageURL[i] = BitmapFactory.decodeStream(url.openConnection().getInputStream());
         }
         return imageURL;
-        }
+    }
 }

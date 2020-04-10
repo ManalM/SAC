@@ -26,6 +26,7 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -54,6 +55,7 @@ public class SignIn extends AppCompatActivity {
                 try {
                     JSONObject obj = new JSONObject(response);
                     if(!obj.getBoolean("error")){
+                        //----save data in preference
                         editor.putString("name", obj.getString("name"));
                         editor.putString("sid",obj.getString("sid"));
                         editor.putString("state",obj.getString("state"));
@@ -64,8 +66,9 @@ public class SignIn extends AppCompatActivity {
                         editor.putString("id",obj.getString("id"));
 
                         editor.putString("image",obj.getString("image"));
-                        editor.apply();
 
+                        editor.apply();
+                        //---if active move to home
                         if (pref.getString("state","").equals("Active")){
                             startActivity(new Intent(SignIn.this,HomeActivity.class));
                             finish();
@@ -81,11 +84,7 @@ public class SignIn extends AppCompatActivity {
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
-                } /*catch (MalformedURLException e) {
-                    e.printStackTrace();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }*/
+                }
 
             }
         }, new Response.ErrorListener() {
@@ -108,4 +107,6 @@ public class SignIn extends AppCompatActivity {
         };
         Volley.newRequestQueue(this).add(stringRequest);
     }
+
+
 }

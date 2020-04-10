@@ -27,7 +27,7 @@ public class ActivityDetailFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View v= inflater.inflate(R.layout.fragment_activity_detail, container, false);
+        View v = inflater.inflate(R.layout.fragment_activity_detail, container, false);
 
         ImageView imageView = v.findViewById(R.id.ac_img1);
         TextView name = v.findViewById(R.id.activity_name);
@@ -36,26 +36,10 @@ public class ActivityDetailFragment extends Fragment {
         Bundle bundle = getArguments();
         name.setText(bundle.getString("name"));
         detail.setText(bundle.getString("detail"));
-        String imageString = bundle.getString("bitmap");
 
 
-        byte[] byteArray =bundle.getByteArray("image");
-       Bitmap bitmap = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
-/*
-        URL url = null;
-        Bitmap bitmap = null;
-
-        try {
-            url = new URL(imageString);
-            bitmap = BitmapFactory.decodeStream(url.openConnection().getInputStream());
-
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-*/
-
+        byte[] byteArray = bundle.getByteArray("image");
+        Bitmap bitmap = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
 
         Glide.with(getContext()).setDefaultRequestOptions(new RequestOptions().placeholder(R.drawable.logo)).load(bitmap).into(imageView);
         return v;

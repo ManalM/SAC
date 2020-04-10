@@ -1,8 +1,9 @@
 package com.example.aouclub;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
-import android.util.Log;
+import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,8 +13,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.RequestOptions;
 
 import java.util.ArrayList;
 
@@ -22,6 +21,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.viewHolder> {
     Bitmap[] imageURL;
     Context context;
 
+    SharedPreferences.Editor pref ;
 
     private Adapter.OnItemClickListener mListener;
 
@@ -44,6 +44,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.viewHolder> {
         brunch = b;
         time = t;
         imageURL = url;
+        pref= PreferenceManager.getDefaultSharedPreferences(context).edit();
     }
 
     @NonNull
@@ -62,13 +63,14 @@ public class Adapter extends RecyclerView.Adapter<Adapter.viewHolder> {
         holder.brunch.setText(brunch.get(position));
         holder.activityPlace.setText(place.get(position));
         holder.activity.setText(activity.get(position));
-        //holder.detail.setText(details.get(position));
-      //  Glide.with(context).setDefaultRequestOptions(new RequestOptions().placeholder(R.drawable.logo)).load(imageURL[position]).into(holder.image);
+
         holder.image.setImageBitmap(imageURL[position]);
     }
 
     @Override
     public int getItemCount() {
+        pref.putInt("numberOfActivity",activity.size());
+        pref.apply();
         return activity.size();
     }
 
@@ -83,7 +85,6 @@ public class Adapter extends RecyclerView.Adapter<Adapter.viewHolder> {
             activity = itemView.findViewById(R.id.activity);
             date = itemView.findViewById(R.id.date);
             time = itemView.findViewById(R.id.time);
-            //detail = itemView.findViewById(R.id.detail);
             image = itemView.findViewById(R.id.ac_img);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
