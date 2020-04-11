@@ -1,11 +1,13 @@
 package com.example.aouclub;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 
 import androidx.appcompat.widget.Toolbar;
@@ -38,11 +40,14 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Objects;
 
 
 public class ActivityFragment extends Fragment {
 
     static RecyclerView recyclerView;
+
+    static  Adapter adapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -70,8 +75,7 @@ public class ActivityFragment extends Fragment {
         Bitmap[] bitmaps;
         String jsonUrl;
         Context context;
-        Adapter adapter;
-
+        ProgressDialog  progressDialog;
         private GetData(Context c, String url) {
             context = c;
             jsonUrl = url;
@@ -86,7 +90,14 @@ public class ActivityFragment extends Fragment {
             time = new ArrayList<>();
             imageString = new ArrayList<>();
         }
-
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            progressDialog = new ProgressDialog(context);
+            progressDialog.setTitle("Retrieving data");
+            progressDialog.setMessage("Please wait");
+            progressDialog.show();
+        }
         @Override
         protected Void doInBackground(Void... voids) {
 
@@ -169,6 +180,8 @@ public class ActivityFragment extends Fragment {
 
             adapter = new Adapter(context, activity, startDate, endDate, time, details, place, brunch, bitmaps);
             recyclerView.setAdapter(adapter);
+            progressDialog.dismiss();
+
             adapter.setOnItemClickListener(new Adapter.OnItemClickListener() {
                 @Override
                 public void onItemClick(int position) {
@@ -182,8 +195,10 @@ public class ActivityFragment extends Fragment {
                     bundle.putByteArray("image", byteArray);
                     ActivityDetailFragment activityDetailFragment = new ActivityDetailFragment();
                     activityDetailFragment.setArguments(bundle);
-                    getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                            activityDetailFragment).commit();
+
+                  getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                                activityDetailFragment).commit();
+
                 }
             });
         }

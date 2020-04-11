@@ -157,8 +157,11 @@ public class SignUp extends AppCompatActivity {
             if (isEmailValid(email.getText().toString())) {
                 if (pass.getText().toString().equals(confirmPass.getText().toString())) {
 
-                    register();
-
+                    if(bitmap!= null) {
+                        register();
+                    }else{
+                        Toast.makeText(this, "You have to upload an image", Toast.LENGTH_SHORT).show();
+                    }
                 } else {
                     Toast.makeText(SignUp.this, "password doesn't match", Toast.LENGTH_SHORT).show();
 
